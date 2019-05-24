@@ -38,8 +38,8 @@ class AccState:
 
 AUDIO_HUD = {
   AudibleAlert.none: (0, 0),
-  AudibleAlert.chimeEngage: (CM.HIGH_CHIME, 1),
-  AudibleAlert.chimeDisengage: (CM.HIGH_CHIME, 1),
+  AudibleAlert.chimeEngage: (0, 0),
+  AudibleAlert.chimeDisengage: (0, 0),
   AudibleAlert.chimeError: (CM.LOW_CHIME, 2),
   AudibleAlert.chimePrompt: (CM.LOW_CHIME, 1),
   AudibleAlert.chimeWarning1: (CM.LOW_CHIME, 2),
