@@ -1,5 +1,3 @@
-from cereal import car
-VisualAlert = car.CarControl.HUDControl.VisualAlert
 def create_steering_control(packer, bus, apply_steer, idx, lkas_active):
 
   values = {
@@ -135,18 +133,17 @@ def create_chime_command(bus, chime_type, duration, repeat_cnt):
   dat = [chime_type, duration, repeat_cnt, 0xff, 0]
   return [0x10400060, 0, "".join(map(chr, dat)), bus]
 
-def create_lka_icon_command(bus, active, critical, visual_alert):
-  if active:
-    if visual_alert == VisualAlert.steerRequired:
-      if critical:
-        dat = "\x50\xc0\x14"
-      else:
-        dat = "\x50\x40\x18"
+def create_lka_icon_command(bus, active, critical, steer):
+  if active and steer == 1:
+    if critical:
+      dat = "\x50\xc0\x14"
     else:
-      if critical:
-        dat = "\x40\xc0\x14"
-      else:
-        dat = "\x40\x40\x18"      
+      dat = "\x50\x40\x18"
+  elif active:
+    if critical:
+      dat = "\x40\xc0\x14"
+    else:
+      dat = "\x40\x40\x18"      
   else:
     dat = "\x00\x00\x00"
   return [0x104c006c, 0, dat, bus]
